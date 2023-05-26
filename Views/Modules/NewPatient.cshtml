@@ -1,0 +1,44 @@
+﻿
+@model V._3._0.Models.Patients
+@using V._3._0.Models;
+@{
+}
+<head>
+    <link rel="stylesheet" href="~/css/Patients/NewPatient.css" />
+</head>
+<body>
+    <h1> Add New Patient</h1>
+    <form asp-controller="Modules" asp-action="NewPatient" method="post">
+        <div class="input">
+            <label asp-for="Name">Patient Name:</label>
+            <input asp-for="Name" type="text"placeholder="Patient_Name">
+        </div>
+        <div class="input">
+            <label asp-for="Status">Status</label>
+            <select asp-for="Status" name="package" id="package-select">
+                <option value="">Select</option>
+                <option value=0>ADMITTED</option>
+                <option value=1>DISCHARGED</option>
+            </select>
+        </div>
+        <div class="input">
+            <label asp-for="Roomno">Room no:</label>
+            <input asp-for="Roomno" type="number" placeholder="Room No" >
+        </div>
+        <div class="input">
+            <label asp-for="DateOfAdm">Date Of Adm</label>
+            <input asp-for="DateOfAdm" type="datetime-local" placeholder="Date of Admission">
+        </div>
+        <div class="input">
+            <label asp-for="DateOfDis">Date Of Dis</label>
+            <input asp-for="DateOfDis" type="datetime-local" placeholder="Date of Dischage">
+        </div>
+        <div id="info">
+            <button type="submit" id="Submit-Button">
+                SUBMIT
+            </button>
+    </form>
+</body>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

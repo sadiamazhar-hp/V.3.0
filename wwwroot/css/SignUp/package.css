@@ -1,0 +1,36 @@
+body{
+    display: flex;
+}
+.package-body{
+    border: 2px solid #46495a;
+    padding: 30px;
+    height: 70%;
+    margin-top: 10%;
+    margin-left: 10%;
+    background: radial-gradient(ellipse at left, #e4e7eb, transparent),
+            radial-gradient(ellipse at right, #112872, transparent);
+    border-radius: 30px;
+    box-shadow: 3px 3px 5px #343d47; 
+    }
+section header{
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border: 2px solid #46495a;
+    padding: 10px;
+    width: 30%;
+    margin-left: 35%;
+    background: linear-gradient(63.1deg, rgba(200, 200, 226, 0.808) 16.4%, rgba(51, 58, 75, 0.815) 64.5%);
+    box-shadow: 3px 3px 6px ;
+}
+.package-body h3{
+    text-align: center;
+    text-shadow: 2px 2px 3px #ffffff9c;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}   
+
+section{
+    margin-right: 3%;
+}

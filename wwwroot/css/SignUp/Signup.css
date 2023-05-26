@@ -1,0 +1,146 @@
+﻿#Header {
+    text-align: center;
+    background-image: linear-gradient(63.1deg, rgba(162, 162, 185, 0.767) 16.4%, rgba(55, 65, 92, 0.644) 64.5%);
+    width: 35%;
+    padding: 4px;
+    border-radius: 10cm;
+    position: relative;
+    left: 31.5%;
+    box-shadow: 6px 5px 9px #393b47;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 3px 5px#b1a4a45b;
+    border: 3.5px;
+    border-color: #545a7c67;
+    border-style: solid;
+}
+
+form {
+    height: 350px;
+    width: 40%;
+    background-color: rgba(24, 21, 31, 0.11);
+    position: relative;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    margin-top: 20%;
+    left: 50%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.01);
+    box-shadow: 6px 5px 9px #484950;
+}
+
+    form div {
+        padding: 1%;
+    }
+
+#Card-Details h3 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    border: rgb(80, 90, 134);
+    border-width: 1px;
+    border-style: solid;
+    padding: 8px;
+    width: 60%;
+    text-align: center;
+    border-radius: 3cm;
+    background-image: linear-gradient(63.1deg, rgba(167, 167, 187, 0.61) 16.4%, rgba(65, 75, 105, 0.836) 64.5%);
+    box-shadow: 6px 3px 7px #41445ad5;
+}
+
+.Input {
+    margin-left: 2%;
+}
+
+    .Input input, select {
+        position: absolute;
+        left: 32%;
+        border-radius: 3cm;
+        border-width: 1px;
+        width: 50%;
+        height: 30px;
+        padding-left: 10px;
+        background-color: rgba(206, 208, 218, 0.952);
+    }
+
+    .Input select {
+        width: 20%;
+        margin-top: 0.5%;
+    }
+
+    .Input a {
+        position: relative;
+        left: 40%;
+        top: 3px;
+        color: #ffffff;
+        border: #070303;
+        border-width: 1px;
+        border-style: solid;
+        padding: 2px 9px 3px 9px;
+        background-color: #2b2e3dc4;
+    }
+
+    .Input input, select:hover {
+        box-shadow: 3px 3px 6px #443e3ea8;
+        background-image: linear-gradient(63.1deg, rgba(208, 208, 219, 0.699) 16.4%, rgba(77, 83, 100, 0.788) 64.5%);
+    }
+
+.details {
+    position: relative;
+    top: -45px;
+    padding: 1%;
+}
+
+    .details input {
+        position: absolute;
+        left: 32%;
+        border-radius: 3cm;
+        border-width: 1px;
+        width: 20%;
+        height: 70%;
+        padding-left: 10px;
+        background-color: rgba(206, 208, 218, 0.952);
+    }
+
+        .details input:hover {
+            box-shadow: 3px 3px 6px #443e3ea8;
+            background-image: linear-gradient(63.1deg, rgba(199, 199, 204, 0.753) 16.4%, rgba(82, 88, 105, 0.788) 64.5%);
+        }
+
+.Card-Type-Details {
+    position: relative;
+    bottom: 25px;
+    left: 32%;
+}
+
+#Card-Type {
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
+#Submit-Button {
+    margin-bottom: -10px;
+    position: relative;
+    bottom: 40px;
+    left: 30%;
+    cursor: pointer;
+    height: 50px;
+    transition-property: box-shadow, background-image;
+    transition: 0.5s;
+    color: #070303;
+    font-weight: bold;
+    width: 40%;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 3px 3px 3px #524a4a;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-image: linear-gradient(63.1deg, rgba(157, 157, 175, 0.938) 16.4%, rgba(80, 90, 121, 0.87) 64.5%);
+}
+
+    #Submit-Button:hover {
+        box-shadow: 5px 5px 5px #443e3e;
+        background-image: linear-gradient(63.1deg, rgb(167, 167, 167) 16.4%, rgba(55, 63, 87, 0.897) 64.5%);
+        color: #ffffff;
+    }
+    

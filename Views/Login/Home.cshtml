@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+    <title>Hospital Name</title>
+    <meta http-equiv="X-UA-Compatible" name="viewport" content="width=device-width , initial-scale=1.0 , IE-Edge" >
+    <link rel="stylesheet" href="/css/Home/Home.css">
+</head>
+<body>
+    <h3>Hospital Name</h3>
+    <hr />
+    <main>
+        <a asp-controller="Modules" asp-action="Patients">
+        <div><img src="~/css/Home/Patient.jpg">
+            <div>Patients</div>
+        </div></a>
+        <a href="/Doctors/Doctors.html">
+            <div>
+                <img src="~/css/Home/Doctors.jpg">
+            <div>Doctors</div>
+            </div>
+        </a>
+        <a href="/Rooms/Room.html">
+            <div>
+                <img src="~/css/Home/Rooms.jpg">
+            <div>Rooms</div>
+            </div></a>
+        <a href="#">
+            <div>
+                <img src="~/css/Home/Accounts.jpg">
+            <div>Accounts</div>
+        </div></a>
+    </main>
+</body>

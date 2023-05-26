@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+ @*THIS CODE IS RUNNING
+    {
+    DateTime D = new DateTime(2019, 05, 09, 09, 15, 00);
+    Patients patients = new Patients()
+            {
+                Id = 1,
+                Name = "kat",
+                Status = 0,
+                DateOfAdm = D,
+                DateOfDis = D,
+            };
+}*@
+@model System.Collections.Generic.IEnumerable<V._3._0.Models.Patients>
+<head>
+    <title>Patients</title>
+    <link rel="stylesheet" href="~/css/Patients/Patients.css" />
+</head>
+<body>
+    <h1> List Of Patients</h1>
+    <div class="Search-Section">
+        <input type="search" type="text" class="Search-Input" placeholder="Search Patient Name" />
+        <button id="Search-Button"><img src="~/css/Patients/PatientSearch.png"></button>
+    </div>
+    <hr>
+    <div>
+        <a asp-controller="Modules" asp-action="NewPatient">
+            <button class="Create_Button">New Patient</button>
+        </a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.Roomno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.DateOfAdm)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.DateOfDis)
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var patients in Model)
+            {
+                <tr>
+                    <td>@patients.Id</td>
+                    <td>@patients.Name</td>
+                    <td>@patients.Status</td>
+                    <td>@if (patients.Status == 0)
+                        {
+                            @patients.Roomno
+                        }
+                    </td>
+                    <td>@patients.DateOfAdm</td>
+                    <td>@patients.DateOfDis</td>
+                    
+                    <td>
+                        <form asp-action="GetPatId" asp-controller="Modules" method="post">
+                            <button name="PatientId" type="submit"value="@patients.Id" class="button-info">
+                                PersonalInfo
+                            </button>
+                        </form>
+                        <a href="#"><button class="button-info">Appoints</button></a>
+                        <a href="#"><button class="button-info">Medical</button></a>
+                        <a href="#"><button class="button-info">Payments</button></a>
+                    </td>
+                    <td>
+                        <button class="button-opt">
+                            <img src="~/css/Patients/write.png" alt="update">
+                        </button>
+                        <button class="button-opt">
+                            <img src="~/css/Patients/remove.png" alt="remove">
+                        </button>
+                    </td>
+                </tr>
+                        
+            }
+        </tbody>
+        
+
+    </table>
+
+</body>
+
+
+
+

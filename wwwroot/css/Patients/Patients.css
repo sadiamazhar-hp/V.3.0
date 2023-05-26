@@ -1,0 +1,122 @@
+﻿.Search-Section {
+    position: relative;
+    left: 80%;
+    bottom: 20px;
+}
+
+hr {
+    position: relative;
+    bottom: 10px;
+}
+
+h1 {
+    position: relative;
+    top: 50px;
+}
+
+.Search-Input {
+    height: 25px;
+    border: none;
+    border-radius: 20cm;
+    padding: 10px;
+    background-image: -webkit-linear-gradient(135deg, rgba(45, 37, 49, 0.479) 16.4%, rgb(253, 253, 253));
+    box-shadow: 8px 5px 8px #524a4a;
+}
+
+#Search-Button {
+    position: relative;
+    top: 11px;
+    height: fit-content;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+    #Search-Button:hover {
+        box-shadow: 8px 5px 8px #222d4288;
+    }
+
+table {
+    width: 100%;
+    background-color: rgb(198, 199, 221);
+    overflow: scroll;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(96, 98, 133, 0.5);
+}
+
+.Constant-Info {
+    grid-template-columns: repeat(12);
+}
+
+table tr td {
+    padding: 3px;
+    position: relative;
+    border: 1px solid black;
+}
+
+#Info {
+    width: 300px;
+}
+
+.button-opt {
+    margin-left: 10px;
+    position: relative;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition-property: width,height;
+    transition-duration: 250ms;
+}
+
+#Options {
+    width: 10%;
+}
+
+.button-info {
+    cursor: pointer;
+    height: 30px;
+    transition-property: box-shadow, background-image;
+    transition: 0.5s;
+    color: #070303;
+    font-weight: bold;
+    width: 90px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 3px 3px 3px #524a4a;
+    background-image: linear-gradient(63.1deg, rgba(126, 126, 170, 0.76) 16.4%, rgba(73, 91, 145, 0.781) 64.5%);
+}
+
+    .button-info:hover {
+        box-shadow: 5px 5px 5px #443e3e;
+        background-image: linear-gradient(63.1deg, rgb(139, 139, 182) 16.4%, rgba(56, 69, 109, 0.938) 64.5%);
+        color: #ffffff;
+    }
+
+.button-opt:hover {
+    box-shadow: 3px 3px 5px #524a4a;
+}
+
+.Create_Button {
+    position: relative;
+    top: 5px;
+    height: 50px;
+    width: 150px;
+    margin-bottom: 2%;
+    background-image: linear-gradient(63.1deg, rgb(171, 171, 218) 16.4%, rgba(56, 69, 109, 0.863) 64.5%);
+    border: none;
+    border-radius: 23cm;
+    box-shadow: 5px 3px 5px #302c2c;
+    cursor: pointer;
+    transition-property: color, box-shadow, background-image;
+    transition: 0.6s;
+}
+
+    .Create_Button:hover {
+        color: #ffffff;
+        box-shadow: 5px 3px 5px #302c2c, 10px 6px 5px #463e3ec0;
+        background-image: linear-gradient(63.1deg, rgb(97, 97, 119) 16.4%, rgba(38, 48, 77, 0.863) 64.5%);
+    }

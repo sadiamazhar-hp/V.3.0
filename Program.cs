@@ -1,8 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using V._3._0.App_Data;
+using V._3._0.Interfaces;
+using V._3._0.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddRazorPages();
+builder.Services.AddMvc();
+//builder.Services.AddScoped<IPatients, PatientsData>();
+//builder.Services.AddScoped<IHosData, HosData>();
+builder.Services.AddDbContext<HospitalData>
+    (options => options.UseSqlServer("Data Source=HAFIZMUHAMMADHA\\SQLEXPRESS;Initial Catalog=V.3.0;Integrated Security=True;TrustServerCertificate=True"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,9 +29,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=login}/{id?}");
 
 app.Run();

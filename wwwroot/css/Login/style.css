@@ -1,0 +1,169 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url('Hos.jpg');
+    background-color: #000710;
+    backdrop-filter: blur(12px);
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    left: 25%;
+    right: 25%;
+}
+
+.background{
+    width: 520px;
+    height: 400px;
+    position: absolute;
+    transform: translate(-50, -50%);
+    top: 50%;
+    left: 50%
+}
+
+.background .shape
+{
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.background .shape:first-child{ 
+    background-image: linear-gradient(63.1deg, rgb(57, 57, 58) 16.4%, rgb(161, 163, 167) 64.5% );
+    left: 50%;
+    bottom: 30%
+}
+
+form{
+    height: 57%;
+    width: 45%;
+    background-color: rgba(255, 255, 255, 0.04);
+    position: absolute;
+    transform: translate(-50% , -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.01);
+}
+
+form * {
+    font-family: 'poppons' , sans-serif;
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+form h3 {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+input{
+    display: block;
+    height: 12%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.45);
+    border-radius: 3cm;
+    padding: 0 10px;
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.login_button{
+    
+    transition: 2s;
+    width: 35%;
+    height: 17%;
+    padding: 8px 0;
+    margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 3px;
+    color: #000000;
+    cursor: pointer;
+ }
+
+ .login{
+    
+    transition: 2s;
+    width: 35%;
+    height: 15%;
+    position: relative;
+    bottom: 0%;
+    border-radius: 3px;
+    color: #c21313;
+    cursor: pointer;
+ }
+ .Signup_button{
+
+    transition: 2s;
+    width: 35%;
+    height: 17%;
+    padding: 8px 0;
+    margin-top: 5%;
+    border-radius: 3px;
+    color: #000000;
+    cursor: pointer;
+    position:relative;
+    bottom: 36%;
+    left: 60%;
+ }
+
+ .text{
+    position: relative;
+    bottom:12%;
+    left: 47%;
+ }
+
+ .login_button:hover{
+    transition: .4s;
+    color: #ffffff;
+    background-image: linear-gradient(63.1deg, rgb(73, 73, 78) 16.4%, rgb(42, 42, 48) 64.5% );
+    box-shadow: 10px 10px 10px 5px #666262;
+ }
+
+ .Signup_button:hover{
+    transition: .4s;
+    color: #ffffff;
+    background-image: linear-gradient(63.1deg, rgb(73, 73, 78) 16.4%, rgb(42, 42, 48) 64.5% );
+    box-shadow: 10px 10px 10px 5px #666262;
+ }
+
+.Social{
+    margin-top: -50px;
+    display: flex;
+}
+
+.Social div{
+    width: 25%;
+    border-radius: 3px;
+    padding: 5px 10px 5px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-align: center;
+
+}
+.icon:hover{
+    transform: scale(1.5,1.5);
+}
+  
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+
+ h3{
+    font-size: 200%;
+    margin-bottom: auto;
+    font-family:Impact;
+    letter-spacing: 3px;
+    -webkit-text-stroke: 0.5px rgb(5, 5, 5);
+    color: rgb(234, 238, 241);
+    text-shadow: 8px 5px 5px #14162275;
+
+ }
+ hr{
+    position: relative;
+        border: none;
+        height: 5px;
+        background: black;
+        margin-top: 2%;
+        margin-bottom: 5%;
+        background-color: rgb(49, 46, 63);
+ }
+main a{
+    margin: 0.75%;
+    border: 2px solid #141622;
+    width: 23%; 
+    border-radius: 20px;
+    padding: 60px;
+    padding-top: 2%;
+    background-color:rgb(46, 51, 58);
+    box-shadow: 10px 10px 6px #3c3e4bbd;
+    float: left;
+    transition-property: box-shadow, width;
+    transition-duration: 200ms;
+    display: flex;
+    margin-top: 2%;
+}
+
+main a div div
+{
+    padding: 10px;
+    width: auto;
+    margin-top: 10%;
+    border-radius: 3cm;
+    text-align: center;
+    background-image: linear-gradient(63.1deg, rgb(110, 110, 134) 16.4%, rgb(62, 68, 90) 64.5%);
+    font-size: large;
+    color: aliceblue;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: #141622 6px 2px 4px ;
+}
+main a div img{
+    width: 130%;
+  height: 85%;
+  border-radius: 17px;
+  margin-left: -15%;
+}
+    
+
+main a:hover{
+    width: 25%;
+    box-shadow: 10px 12px 12px 6px #3c3e4b;
+}

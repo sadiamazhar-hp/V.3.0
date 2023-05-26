@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model V._3._0.Models.SignUp
+<head>
+    <title> Signup Now</title>
+    <meta http-equiv="X-UA-Compatible" name="viewport" content="width=device-width , initial-scale=1.0 , IE-Edge">
+    <link rel="stylesheet" href="~/css/SignUp/Signup.css">
+</head>
+<body>
+    <div id="Header">
+        <h2>
+            SIGN UP NOW
+            <br>
+            TO HOSPITAL WEB
+        </h2>
+    </div>
+    
+    <form asp-controller="SignUp" asp-action="SignUp" method="post">
+        <div class="Input">
+            <label asp-for="HospitalName">Name Of Hospital:</label>
+            <input asp-for="HospitalName" type=" Text" placeholder="Name of Hospital">  
+        </div>
+        <span class="text-danger" asp-validation-for="HospitalName"></span>
+        <div class="Input">
+            <label asp-for="location">Location of Hospital:</label>
+            <input asp-for="location" type="Text" placeholder="location">
+        </div>
+        <span class="text-danger" asp-validation-for="location"></span>
+        <div class="Input">
+            <label asp-for="Email">E-mail</label>
+            <input asp-for="Email" type="Text" placeholder="E-mail">
+        </div>
+        <span class="text-danger" asp-validation-for="Email"></span>
+        <div class="Input">
+            <label asp-for="Password">Password:</label>
+            <input asp-for="Password" type="password" placeholder="Password">
+        </div>
+        <span class="text-danger" asp-validation-for="Password"></span>
+        <div class="Input">
+            <label asp-for="ConfirmPassword">Confirm Password:</label>
+            <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password">
+        </div>
+                <button id="Submit-Button" type="submit">SIGN UP</button>
+        </form>
+  
+    
+</body>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model V._3._0.Models.UserLogin
+<head>
+    <title> Hospitium Login </title>
+    <meta http-equiv="X-UA-Compatible" name="viewport" content="width=device-width , initial-scale=1.0 , IE-Edge">
+    <link rel="stylesheet" href="~/css/Login/style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+    </div>
+    <form action="Login/Home" method="post">
+        <h3> Login Here </h3>
+        <label asp-for="Emailid"> E-Mail</label>
+        <input asp-for="Emailid" type=" text" placeholder="Email">
+        <span class="text-danger" asp-validation-for="Emailid"></span>
+        <label asp-for="Password"> Password </label>
+        <input asp-for="Password" type="password" placeholder="Password">
+        <span class="text-danger" asp-validation-for="Password"></span>
+        <br> 
+
+           <button asp-controller="Login" asp-action="Home"
+           type="submit" class="login_button">
+                Login
+            </button>
+        
+
+        <p class="text">Or</p>
+
+        <a asp-controller="SignUp" asp-action="Signup">
+            <input class="Signup_button" type=button value='Signup'>
+        </a>
+
+        <footer class="Social">
+            <div><a href="#" class="twitter"><img class="icon" src="~/css/Login/twitter.png"></a></div>
+            <div><a href="#" class="facebook"><img class="icon" src="~/css/Login/facebook.png"></a></div>
+            <div><a href="#" class="gmail"><img class="icon" src="~/css/Login/gmail.png"></a></div>
+            <div><a href="#" class="youtube"><img class="icon" src="~/css/Login/youtube.png"></a></div>
+        </footer>
+    </form>
+
+</body>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
