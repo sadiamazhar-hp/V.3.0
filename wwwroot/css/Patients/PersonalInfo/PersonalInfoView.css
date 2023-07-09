@@ -1,0 +1,45 @@
+﻿#Header {
+    text-align: center;
+    background-image: linear-gradient(63.1deg, rgba(162, 162, 185, 0.767) 16.4%, rgba(55, 65, 92, 0.644) 64.5%);
+    width: 35%;
+    padding: 4px;
+    border-radius: 10cm;
+    position: relative;
+    left: 31.5%;
+    box-shadow: 6px 5px 9px #393b47;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 3px 5px#b1a4a45b;
+    border: 3.5px;
+    border-color: #545a7c67;
+    border-style: solid;
+}
+.Info-Section {
+    height: 350px;
+    width: 40%;
+    background-color: rgba(24, 21, 31, 0.11);
+    position: relative;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    margin-top: 20%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.01);
+    box-shadow: 6px 5px 9px #484950;
+}
+.info-container {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-gap: 10px;
+    align-items: center;
+    padding: 5px;
+    margin-left: 20px;
+    margin-top: 2%;
+    font-size: large;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.Info-data {
+    margin: 0;
+    
+
+}

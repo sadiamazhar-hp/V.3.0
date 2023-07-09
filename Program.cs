@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using V._3._0.App_Data;
+using V._3._0.Controllers;
 using V._3._0.Interfaces;
+using V._3._0.Methods;
 using V._3._0.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddMvc();
-//builder.Services.AddScoped<IPatients, PatientsData>();
+builder.Services.AddScoped<IPatients, PatientData>();
+
+
 //builder.Services.AddScoped<IHosData, HosData>();
 builder.Services.AddDbContext<HospitalData>
     (options => options.UseSqlServer("Data Source=HAFIZMUHAMMADHA\\SQLEXPRESS;Initial Catalog=V.3.0;Integrated Security=True;TrustServerCertificate=True"));

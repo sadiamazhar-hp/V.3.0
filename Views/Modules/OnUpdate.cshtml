@@ -1,5 +1,4 @@
-﻿
-@model V._3._0.Models.Patients
+﻿@model V._3._0.Models.Patients
 @using V._3._0.Models;
 @{
 }
@@ -7,12 +6,12 @@
     <link rel="stylesheet" href="~/css/Patients/NewPatient.css" />
 </head>
 <body>
-    <h1> Add New Patient</h1>
-    <form asp-controller="Modules" asp-action="NewPatient" method="post">
+    <h1> Edit Patient</h1>
+    <form asp-controller="Modules" asp-action="OnUpdated" method="post">
         <div class="input">
             <input asp-for="Id" type="hidden" />
             <label asp-for="Name">Patient Name:</label>
-            <input asp-for="Name" type="text"placeholder="Patient_Name">
+            <input asp-for="Name" value="@Model.Name" type="text" placeholder="Patient_Name">
         </div>
         <div class="input">
             <label asp-for="Status">Status</label>
@@ -22,15 +21,15 @@
         </div>
         <div class="input">
             <label asp-for="Roomno">Room no:</label>
-            <input asp-for="Roomno" type="number" placeholder="Room No" >
+            <input asp-for="Roomno" type="number" placeholder="Room No">
         </div>
         <div class="input">
             <label asp-for="DateOfAdm">Date Of Adm</label>
-            <input asp-for="DateOfAdm" type="datetime-local" placeholder="Date of Admission">
+            <input asp-for="DateOfAdm" value="@Model.DateOfAdm.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local" placeholder="Date of Admission">
         </div>
         <div class="input">
             <label asp-for="DateOfDis">Date Of Dis</label>
-            <input asp-for="DateOfDis" type="datetime-local" placeholder="Date of Dischage">
+            <input asp-for="DateOfDis" value="@Model.DateOfDis.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local" placeholder="Date of Dischage">
         </div>
         <div id="info">
             <button type="submit" id="Submit-Button">

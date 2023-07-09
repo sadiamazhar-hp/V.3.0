@@ -2,7 +2,39 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model V._3._0.Models.PersonalInfo
-
-<body>
-    <h1>@Model.Name</h1>
+<head>
+    <link rel="stylesheet" href="~/css/Patients/PersonalInfo/PersonalInfoView.css" />
+</head>
+<body >
+    <h1 id="Header">PERSONAL INFORMATION OF @Model.Name</h1>
+    <div class="Info-Section">
+        <div class="info-container">
+            <label asp-for="@Model.Name">Name: </label>
+            <div class="Info-data">@Model.Name</div>
+        </div>
+        <div class="info-container">
+            <label asp-for="@Model.FatherName"> Father Name: </label>
+            <div class="Info-data">@Model.FatherName</div>
+        </div>
+        <div class="info-container">
+            <label asp-for="@Model.Gender">Gender: </label>
+            <div class="Info-data">@Model.Gender</div>
+        </div>
+        <div class="info-container">
+            <label asp-for="@Model.Age">Age: </label>
+            <div class="Info-data">@Model.Age</div>
+        </div>
+        <div class="info-container">
+            <label asp-for="@Model.Email">Email: </label>
+            <div class="Info-data">@Model.Email</div>
+        </div>
+        <div class="info-container">
+            <label asp-for="@Model.Address">Address: </label>
+            <div class="Info-data">@Model.Address</div>
+        </div>
+        <div class="info-container">
+            <label asp-for="@Model.Contact">Contact: </label>
+            <div class="Info-data">@Model.Contact</div>
+    </div>
+    
 </body>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using V._3._0.App_Data;
 
@@ -11,9 +12,11 @@ using V._3._0.App_Data;
 namespace V._3._0.Migrations
 {
     [DbContext(typeof(HospitalData))]
-    partial class HospitalDataModelSnapshot : ModelSnapshot
+    [Migration("20230614174920_4")]
+    partial class _4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,32 +24,6 @@ namespace V._3._0.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("V._3._0.Models.MedicalInfo", b =>
-                {
-                    b.Property<int>("MedId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedId"));
-
-                    b.Property<byte[]>("ImageFile")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ImageFileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatientsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MedId");
-
-                    b.HasIndex("PatientsId");
-
-                    b.ToTable("MedicalInfo");
-                });
 
             modelBuilder.Entity("V._3._0.Models.Patients", b =>
                 {
@@ -154,17 +131,6 @@ namespace V._3._0.Migrations
                     b.ToTable("HosUser");
                 });
 
-            modelBuilder.Entity("V._3._0.Models.MedicalInfo", b =>
-                {
-                    b.HasOne("V._3._0.Models.Patients", "Patients")
-                        .WithMany("MedicalInfo")
-                        .HasForeignKey("PatientsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Patients");
-                });
-
             modelBuilder.Entity("V._3._0.Models.PersonalInfo", b =>
                 {
                     b.HasOne("V._3._0.Models.Patients", "Patients")
@@ -178,8 +144,6 @@ namespace V._3._0.Migrations
 
             modelBuilder.Entity("V._3._0.Models.Patients", b =>
                 {
-                    b.Navigation("MedicalInfo");
-
                     b.Navigation("PersonalInfo")
                         .IsRequired();
                 });

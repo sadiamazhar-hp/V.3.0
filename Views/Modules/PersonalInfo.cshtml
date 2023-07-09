@@ -1,6 +1,9 @@
-﻿@*
+﻿ @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@{
+    
+}
 
 @model V._3._0.Models.PersonalInfo;
 <head>
@@ -9,14 +12,12 @@
 </head>
 <body>
     <h1> PATIENT PERSONAL INFORMATION</h1>
-    <h2>Name</h2>
+    <h2>@Model.Name</h2>
     <form method="post" asp-controller="Modules" asp-action="PersonalInfo">
         <div>
-            <input asp-for="PatId" type="hidden" value="@ViewBag.PatientId"/>
-            <div class="input">
-                <label asp-for="Name" >First Name:</label>
-                <input asp-for="Name" placeholder="Name" type="text">
-            </div>
+            <input asp-for="PatId" type="hidden"/>
+            <input asp-for="Name" type="hidden">
+            
             <div class="input">
                 <label asp-for="FatherName">Father Name:</label>
                 <input asp-for="FatherName" type="text" placeholder="Father Name">

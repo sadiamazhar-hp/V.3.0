@@ -41,7 +41,7 @@ namespace V._3._0.Models
         public DateTime DateOfDis { get; set; }
 
         public virtual PersonalInfo PersonalInfo { get; set; }
-
+        public virtual ICollection<MedicalInfo> MedicalInfo { get; set; }
     }
     public class PersonalInfo
     {
@@ -62,7 +62,15 @@ namespace V._3._0.Models
     }
     public class MedicalInfo
     {
-
+        [BindProperty]
+        
+        [Key]
+        public int MedId { get; set; }
+        
+        public byte[] ImageFile { get; set; }
+        public string ImageFileName { get; set; }
+        public int PatientsId { get; set; } // Convention-based foreign key
+        public virtual Patients Patients { get; set; }
     }
     public class DoctorApp {
         [BindProperty]

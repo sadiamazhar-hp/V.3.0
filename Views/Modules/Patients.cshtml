@@ -22,8 +22,10 @@
 <body>
     <h1> List Of Patients</h1>
     <div class="Search-Section">
-        <input type="search" type="text" class="Search-Input" placeholder="Search Patient Name" />
-        <button id="Search-Button"><img src="~/css/Patients/PatientSearch.png"></button>
+        <form asp-controller="Modules" asp-action="OnGet" method="get">
+            <input name="searchinput" type="text" class="Search-Input" placeholder="Search Patient Name" />
+            <button type="submit" id="Search-Button"><img src="~/css/Patients/PatientSearch.png"></button>
+        </form>
     </div>
     <hr>
     <div>
@@ -72,21 +74,35 @@
                     
                     <td>
                         <form asp-action="GetPatId" asp-controller="Modules" method="post">
-                            <button name="PatientId" type="submit"value="@patients.Id" class="button-info">
-                                PersonalInfo
+                            <input name="patid" value="@patients.Id" type="hidden" />
+                            <button name="Button" type="submit" value="personalinfo"
+                                class="button-info">
+                               BioInfo
                             </button>
                         </form>
                         <a href="#"><button class="button-info">Appoints</button></a>
-                        <a href="#"><button class="button-info">Medical</button></a>
+                        <form asp-action="GetPatId" asp-controller="Modules" method="post">
+                            <input name="patid" value="@patients.Id" type="hidden" />
+                            <button name="Button" type="submit" value="medicalinfo"
+                                class="button-info">
+                                MedInfo
+                            </button>
+                        </form>
                         <a href="#"><button class="button-info">Payments</button></a>
                     </td>
                     <td>
-                        <button class="button-opt">
-                            <img src="~/css/Patients/write.png" alt="update">
-                        </button>
-                        <button class="button-opt">
-                            <img src="~/css/Patients/remove.png" alt="remove">
-                        </button>
+                        <form asp-action="OnUpdate" asp-controller="Modules" method="post">
+                            <button name="PatientId" type="submit" value="@patients.Id"
+                                class="button-opt">
+                                <img src="~/css/Patients/write.png" alt="Update">
+                            </button>
+                        </form>
+                        <form asp-action="OnDelete" asp-controller="Modules" method="post">
+                            <button name="PatientId" type="submit" value="@patients.Id"
+                                class="button-opt">
+                                <img src="~/css/Patients/remove.png" alt="Delete">
+                            </button>
+                        </form>
                     </td>
                 </tr>
                         

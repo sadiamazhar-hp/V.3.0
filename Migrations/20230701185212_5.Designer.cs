@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using V._3._0.App_Data;
 
@@ -11,9 +12,11 @@ using V._3._0.App_Data;
 namespace V._3._0.Migrations
 {
     [DbContext(typeof(HospitalData))]
-    partial class HospitalDataModelSnapshot : ModelSnapshot
+    [Migration("20230701185212_5")]
+    partial class _5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +33,11 @@ namespace V._3._0.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MedId"));
 
-                    b.Property<byte[]>("ImageFile")
+                    b.Property<string>("FileName")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageFileName")
+                    b.Property<string>("FilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -43,7 +46,8 @@ namespace V._3._0.Migrations
 
                     b.HasKey("MedId");
 
-                    b.HasIndex("PatientsId");
+                    b.HasIndex("PatientsId")
+                        .IsUnique();
 
                     b.ToTable("MedicalInfo");
                 });
@@ -157,8 +161,8 @@ namespace V._3._0.Migrations
             modelBuilder.Entity("V._3._0.Models.MedicalInfo", b =>
                 {
                     b.HasOne("V._3._0.Models.Patients", "Patients")
-                        .WithMany("MedicalInfo")
-                        .HasForeignKey("PatientsId")
+                        .WithOne("MedicalInfo")
+                        .HasForeignKey("V._3._0.Models.MedicalInfo", "PatientsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -178,7 +182,8 @@ namespace V._3._0.Migrations
 
             modelBuilder.Entity("V._3._0.Models.Patients", b =>
                 {
-                    b.Navigation("MedicalInfo");
+                    b.Navigation("MedicalInfo")
+                        .IsRequired();
 
                     b.Navigation("PersonalInfo")
                         .IsRequired();

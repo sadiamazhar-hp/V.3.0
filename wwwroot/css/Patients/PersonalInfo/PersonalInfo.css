@@ -37,8 +37,11 @@ form {
 }
 
 .input {
-    padding: 5px;
-    margin-left: 20px;
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-gap: 20px;
+    align-items: center;
+    padding: 2%;
     margin-top: 2%;
 }
 
@@ -47,13 +50,9 @@ form div {
 }
 
 .input input, select {
-    position: absolute;
-    left: 40%;
     border-radius: 3cm;
     border-width: 1px;
-    width: 30%;
-    height: 4%;
-    padding-left: 10px;
+    margin: 0;
     background-color: rgba(206, 208, 218, 0.952);
 }
 
