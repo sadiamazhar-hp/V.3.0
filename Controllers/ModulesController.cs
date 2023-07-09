@@ -191,7 +191,7 @@ namespace V._3._0.Controllers
             return RedirectToAction("Patients", "Modules");
         }
         //For display of multiple medical file of a specific patient
-        public IActionResult MedFiles(int patientId, string patientName)
+        public IActionResult MedFiles(int patientId)
         {
             //list of medical files of specific patient
             List<MedicalInfo> medfiles = db.MedicalInfo.Where(p => p.PatientsId == patientId).ToList();
@@ -200,13 +200,16 @@ namespace V._3._0.Controllers
         }
 
         //For medicalinfo of the patient to upload
-        public IActionResult PatientMed(int patientId, string patientName)
+        public IActionResult PatientMed(int Upload)
         {
-            
-            MedicalInfo file = new MedicalInfo() { PatientsId = patientId };
-            ViewBag.Name = patientName;
-            return View(file);
+            ViewBag.Patid = Upload;
+            return View();
         }
+        /*[HttpPost]
+        public IActionResult Upload(int Upload)
+        {
+            return RedirectToAction("PatientMed", "Modules", new { Patid = Upload });
+        }*/
 
         [HttpPost]
         public IActionResult PatientMed(MedicalInfo file ,IFormFile ImageFile)
@@ -233,7 +236,7 @@ namespace V._3._0.Controllers
                 };
                 db.MedicalInfo.Add(File);
                 db.SaveChanges();
-                return View("~/Views/Modules/file.cshtml", file);
+                return RedirectToAction("MedFiles", "Modules", new { patientId = File.PatientsId});
             }
             return View();
             
