@@ -28,8 +28,4 @@
     <PackageReference Include="System.Net.Security" Version="4.3.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="App_Data\MedInfoFIles\" />
-  </ItemGroup>
-
 </Project>

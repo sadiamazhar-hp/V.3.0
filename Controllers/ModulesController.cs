@@ -8,6 +8,7 @@ using V._3._0.Models ;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Net.Http.Headers;
 
 namespace V._3._0.Controllers
 {
@@ -85,7 +86,7 @@ namespace V._3._0.Controllers
             }
             if (Button == "medicalinfo")
             {
-                return RedirectToAction("PatientMed", "Modules", new { patientId = value, patientName = PatientName });
+                return RedirectToAction("MedFiles", "Modules", new { patientId = value, patientName = PatientName });
             }
             return RedirectToAction("Patients", "Modules");
 
@@ -159,6 +160,15 @@ namespace V._3._0.Controllers
             return RedirectToAction("Patients", "Modules");
         }
         [HttpPost]
+        //Delete MedicalFile using MedId
+        public IActionResult OnDeleteMedfile(int medid, int patid) 
+        {
+            var medfile = db.MedicalInfo.Find(medid);
+            db.MedicalInfo.Remove(medfile);
+            db.SaveChanges();
+            return RedirectToAction("GetPatId", "Modules", new { patid = patid, Button = "medicalinfo" });
+        }
+        [HttpPost]
         //update patient using ID
         public IActionResult OnUpdate(int PatientId) 
         {
@@ -180,15 +190,26 @@ namespace V._3._0.Controllers
             db.SaveChanges();
             return RedirectToAction("Patients", "Modules");
         }
-        //For medicalinfo of the patient
+        //For display of multiple medical file of a specific patient
+        public IActionResult MedFiles(int patientId, string patientName)
+        {
+            //list of medical files of specific patient
+            List<MedicalInfo> medfiles = db.MedicalInfo.Where(p => p.PatientsId == patientId).ToList();
+            ViewBag.ID = patientId;
+            return View(medfiles);
+        }
+
+        //For medicalinfo of the patient to upload
         public IActionResult PatientMed(int patientId, string patientName)
         {
-            var medicalInfo = new Models.MedicalInfo { PatientsId = patientId};
-            return View(medicalInfo);
+            
+            MedicalInfo file = new MedicalInfo() { PatientsId = patientId };
+            ViewBag.Name = patientName;
+            return View(file);
         }
 
         [HttpPost]
-        public IActionResult PatientMed(IFormFile ImageFile)
+        public IActionResult PatientMed(MedicalInfo file ,IFormFile ImageFile)
         {
             if (ImageFile != null && ImageFile.Length > 0)
             {
@@ -199,37 +220,38 @@ namespace V._3._0.Controllers
                     ImageFile.CopyTo(memoryStream);
                     imageBytes = memoryStream.ToArray();
                 }
+
+                // Get the original file name from Content-Disposition header
+                var contentDisposition = ContentDispositionHeaderValue.Parse(ImageFile.ContentDisposition);
+                var originalFileName = contentDisposition.FileName.ToString();
+
                 MedicalInfo File = new MedicalInfo()
                 {
-                    ImageFileName = ImageFile.Name,
+                    PatientsId = file.PatientsId,
+                    ImageFileName = originalFileName ,
                     ImageFile = imageBytes
                 };
                 db.MedicalInfo.Add(File);
                 db.SaveChanges();
-                return View("~/Views/Modules/file.cshtml", ImageFile);
+                return View("~/Views/Modules/file.cshtml", file);
             }
             return View();
+            
+        }
+        public IActionResult RetrieveImage(int id)
+        {
+            MedicalInfo file = db.MedicalInfo.Find(id);
 
-
-
-            /*if (file != null && file.FilePath != null)
+            if (file != null)
             {
-                // Process the uploaded file
-                string fileName = Path.GetFileName(file.FilePath);
-                string subfolderPath = Path.Combine(webHostEnvironment.ContentRootPath, "App_Data", "MedInfoFIles");
-                string filePath = Path.Combine(subfolderPath, fileName);
-                file.FilePath = filePath; // Update the file path
-
-                // Save the file or perform any other required operations
-
-                // Redirect to a success page or perform further actions
-                return RedirectToAction("UploadSuccess");
+                return File(file.ImageFile, "image/jpeg"); // Adjust the content type based on the image format stored in the database
             }
 
-            // If no file was uploaded or an error occurred, return the same view with an error message
-            //ModelState.AddModelError(string.Empty, "Please select a file to upload.");
-            return View("~/Views/Modules/file.cshtml",file);*/
+            // Handle file not found error
+            return NotFound();
         }
+        //<img src="@Url.Action("RetrieveImage", "Modules", new { id = Model.PatientsId })" alt="Patient Image" />
+       
     }
 }
 

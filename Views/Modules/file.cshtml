@@ -1,5 +1,14 @@
 ﻿@model V._3._0.Models.MedicalInfo
+@{
+    var PatName  = ViewBag.Name as string;
+    var Patid = ViewBag.Patid as int?;
+}
+
 <h1>OLAH FILE</h1>
-<h2>@Model.ImageFileName</h2>
-<h2>@Model.PatientsId</h2>
-<h2>@Model.MedId</h2>
+<h2>@Patid</h2>
+<h2>@PatName</h2>
+
+<div>
+    
+</div>
+
