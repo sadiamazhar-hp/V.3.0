@@ -161,12 +161,12 @@ namespace V._3._0.Controllers
         }
         [HttpPost]
         //Delete MedicalFile using MedId
-        public IActionResult OnDeleteMedfile(int medid, int patid) 
+        public IActionResult OnDeleteMedfile(int medid, int patid)
         {
             var medfile = db.MedicalInfo.Find(medid);
             db.MedicalInfo.Remove(medfile);
             db.SaveChanges();
-            return RedirectToAction("GetPatId", "Modules", new { patid = patid, Button = "medicalinfo" });
+            return RedirectToAction("MedFiles", "Modules", new { patientId = patid});
         }
         [HttpPost]
         //update patient using ID

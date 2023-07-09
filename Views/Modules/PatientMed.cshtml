@@ -1,7 +1,7 @@
 ﻿@model V._3._0.Models.MedicalInfo
 @{
     var PatName  = ViewBag.Name as string;
-    var Patid = ViewBag.Patid as int?;
+    
 }
 <!DOCTYPE html>
 <html>
@@ -13,8 +13,8 @@
     <h1> PATIENT MEDICAL INFORMATION</h1>
     <h2>@PatName</h2>
     <form enctype="multipart/form-data" method="post">
-        <h1>@Patid</h1>
-        <input asp-for="@Model.PatientsId" value="@Patid" type="hidden" />
+        <h1>@Model.PatientsId</h1>
+        <input asp-for="@Model.PatientsId" value="@Model.PatientsId" type="hidden" />
         <input asp-for="@Model.ImageFile" class="in" type="file" name="ImageFile" accept="image/jpeg" />
         <button type="submit" value="Upload" id="Submit-Button">Upload</button>
     </form>
