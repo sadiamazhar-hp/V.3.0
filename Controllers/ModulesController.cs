@@ -86,7 +86,7 @@ namespace V._3._0.Controllers
             }
             if (Button == "medicalinfo")
             {
-                return RedirectToAction("MedFiles", "Modules", new { patientId = value, patientName = PatientName });
+                return RedirectToAction("MedFile", "Modules", new { patientId = value, patientName = PatientName });
             }
             return RedirectToAction("Patients", "Modules");
 
@@ -191,7 +191,7 @@ namespace V._3._0.Controllers
             return RedirectToAction("Patients", "Modules");
         }
         //For display of multiple medical file of a specific patient
-        public IActionResult MedFiles(int patientId)
+        public IActionResult MedFile(int patientId)
         {
             //list of medical files of specific patient
             List<MedicalInfo> medfiles = db.MedicalInfo.Where(p => p.PatientsId == patientId).ToList();
@@ -241,20 +241,19 @@ namespace V._3._0.Controllers
             return View();
             
         }
-        public IActionResult RetrieveImage(int id)
+        public IActionResult GetImage(MedicalInfo file)
         {
-            MedicalInfo file = db.MedicalInfo.Find(id);
-
+            
             if (file != null)
             {
-                return File(file.ImageFile, "image/jpeg"); // Adjust the content type based on the image format stored in the database
+                return File(file.ImageFile, "image/jpeg");
             }
 
             // Handle file not found error
             return NotFound();
         }
         //<img src="@Url.Action("RetrieveImage", "Modules", new { id = Model.PatientsId })" alt="Patient Image" />
-       
+
     }
 }
 
