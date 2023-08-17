@@ -12,7 +12,7 @@ using V._3._0.App_Data;
 namespace V._3._0.Migrations
 {
     [DbContext(typeof(HospitalData))]
-    [Migration("20230708213000_8")]
+    [Migration("20230817163847_8")]
     partial class _8
     {
         /// <inheritdoc />
@@ -49,6 +49,34 @@ namespace V._3._0.Migrations
                     b.HasIndex("PatientsId");
 
                     b.ToTable("MedicalInfo");
+                });
+
+            modelBuilder.Entity("V._3._0.Models.PatientApp", b =>
+                {
+                    b.Property<int>("App")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("App"));
+
+                    b.Property<DateTime>("AppDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("AppTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PatientsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Process")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("App");
+
+                    b.HasIndex("PatientsId");
+
+                    b.ToTable("PatientApp");
                 });
 
             modelBuilder.Entity("V._3._0.Models.Patients", b =>
@@ -168,6 +196,17 @@ namespace V._3._0.Migrations
                     b.Navigation("Patients");
                 });
 
+            modelBuilder.Entity("V._3._0.Models.PatientApp", b =>
+                {
+                    b.HasOne("V._3._0.Models.Patients", "Patients")
+                        .WithMany("PatientApp")
+                        .HasForeignKey("PatientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patients");
+                });
+
             modelBuilder.Entity("V._3._0.Models.PersonalInfo", b =>
                 {
                     b.HasOne("V._3._0.Models.Patients", "Patients")
@@ -182,6 +221,8 @@ namespace V._3._0.Migrations
             modelBuilder.Entity("V._3._0.Models.Patients", b =>
                 {
                     b.Navigation("MedicalInfo");
+
+                    b.Navigation("PatientApp");
 
                     b.Navigation("PersonalInfo")
                         .IsRequired();

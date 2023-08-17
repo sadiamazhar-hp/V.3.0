@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using V._3._0.App_Data;
 
@@ -11,9 +12,11 @@ using V._3._0.App_Data;
 namespace V._3._0.Migrations
 {
     [DbContext(typeof(HospitalData))]
-    partial class HospitalDataModelSnapshot : ModelSnapshot
+    [Migration("20230817163051_7")]
+    partial class _7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,7 +199,7 @@ namespace V._3._0.Migrations
             modelBuilder.Entity("V._3._0.Models.PatientApp", b =>
                 {
                     b.HasOne("V._3._0.Models.Patients", "Patients")
-                        .WithMany("PatientApp")
+                        .WithMany()
                         .HasForeignKey("PatientsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -218,8 +221,6 @@ namespace V._3._0.Migrations
             modelBuilder.Entity("V._3._0.Models.Patients", b =>
                 {
                     b.Navigation("MedicalInfo");
-
-                    b.Navigation("PatientApp");
 
                     b.Navigation("PersonalInfo")
                         .IsRequired();

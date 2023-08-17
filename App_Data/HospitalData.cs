@@ -23,15 +23,19 @@ namespace V._3._0.App_Data
             .HasForeignKey<PersonalInfo>(p => p.PatId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            /*Configure the one-to-one relationship
+            /*Configure the one-to-many relationship
               for patients and its MedicalInfo*/
             modelBuilder.Entity<Patients>()
             .HasMany(m => m.MedicalInfo)
             .WithOne(p => p.Patients)
             .OnDelete(DeleteBehavior.Cascade);
 
-            /*Configure the one-to-one relationship
+            /*Configure the one-to-many relationship
               for patients and its Appointments*/
+            modelBuilder.Entity<Patients>()
+            .HasMany(m => m.PatientApp)
+            .WithOne(p => p.Patients)
+            .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

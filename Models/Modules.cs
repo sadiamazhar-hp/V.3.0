@@ -42,6 +42,7 @@ namespace V._3._0.Models
 
         public virtual PersonalInfo PersonalInfo { get; set; }
         public virtual ICollection<MedicalInfo> MedicalInfo { get; set; }
+        public virtual ICollection<PatientApp> PatientApp { get; set; }
     }
     public class PersonalInfo
     {
