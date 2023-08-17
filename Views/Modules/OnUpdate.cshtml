@@ -11,7 +11,7 @@
         <div class="input">
             <input asp-for="Id" type="hidden" />
             <label asp-for="Name">Patient Name:</label>
-            <input asp-for="Name" value="@Model.Name" type="text" placeholder="Patient_Name">
+            <input asp-for="Name" type="text" >
         </div>
         <div class="input">
             <label asp-for="Status">Status</label>
@@ -21,7 +21,7 @@
         </div>
         <div class="input">
             <label asp-for="Roomno">Room no:</label>
-            <input asp-for="Roomno" type="number" placeholder="Room No">
+            <input asp-for="Roomno" value="@Model.Roomno" type="number" placeholder="Room No">
         </div>
         <div class="input">
             <label asp-for="DateOfAdm">Date Of Adm</label>

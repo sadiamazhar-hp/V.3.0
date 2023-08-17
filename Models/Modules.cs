@@ -72,10 +72,24 @@ namespace V._3._0.Models
         public int PatientsId { get; set; } // Convention-based foreign key
         public virtual Patients Patients { get; set; }
     }
-    public class DoctorApp {
+    public class PatientApp {
         [BindProperty]
+        [Key]
+        public int App { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime AppDate { get; set; }
-        
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime AppTime { get; set; }
+
+        public string Process { get; set; }
+        public int PatientsId { get; set; } // Convention-based foreign key
+        public virtual Patients Patients { get; set; }
+
+
     } 
 
 }

@@ -12,6 +12,7 @@ namespace V._3._0.App_Data
         public DbSet<PersonalInfo> PersonalInfo { get; set; }
 
         public DbSet<MedicalInfo> MedicalInfo{ get; set; }
+        public DbSet<PatientApp> PatientApp { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /* Configure the one-to-one relationship
@@ -22,11 +23,15 @@ namespace V._3._0.App_Data
             .HasForeignKey<PersonalInfo>(p => p.PatId)
             .OnDelete(DeleteBehavior.Cascade);
 
-            /*for patients and its MedicalInfo*/
+            /*Configure the one-to-one relationship
+              for patients and its MedicalInfo*/
             modelBuilder.Entity<Patients>()
             .HasMany(m => m.MedicalInfo)
             .WithOne(p => p.Patients)
             .OnDelete(DeleteBehavior.Cascade);
+
+            /*Configure the one-to-one relationship
+              for patients and its Appointments*/
         }
 
     }

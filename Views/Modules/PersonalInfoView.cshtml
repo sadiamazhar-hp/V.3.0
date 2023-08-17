@@ -6,7 +6,20 @@
     <link rel="stylesheet" href="~/css/Patients/PersonalInfo/PersonalInfoView.css" />
 </head>
 <body >
+    
     <h1 id="Header">PERSONAL INFORMATION OF @Model.Name</h1>
+    <div class="button-container">
+        <form asp-controller="Modules" asp-action="OnUpdatePersonalInfo">
+            <input name="InfoId" value="@Model.PIId" type="hidden" />
+            <button type="submit" class="custom-button">Update</button>
+        </form>
+        
+        <form asp-controller="Modules" asp-action="OnDeletePersonalInfo" method="post">
+            <input name="infoId" value="@Model.PIId" type="hidden"/>
+            <button name="patId" value="@ViewBag.patId" type="submit" class="custom-button">Delete</button>
+        </form>
+    </div>
+
     <div class="Info-Section">
         <div class="info-container">
             <label asp-for="@Model.Name">Name: </label>
@@ -35,6 +48,11 @@
         <div class="info-container">
             <label asp-for="@Model.Contact">Contact: </label>
             <div class="Info-data">@Model.Contact</div>
+        </div>
+        
     </div>
+    
+    
+    
     
 </body>

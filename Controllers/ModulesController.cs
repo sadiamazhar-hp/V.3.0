@@ -32,107 +32,6 @@ namespace V._3._0.Controllers
             patients = db.Patients.ToList();
             return View(patients);
         }
-        //Display form for new patient for entry
-        public IActionResult NewPatient() { return View(); }
-
-        //Submit the form and add new patient in patient list
-        [HttpPost]
-        public IActionResult NewPatient(Models.Patients newpatient)
-        {
-            Models.Patients patient = new Models.Patients()
-            {
-                Id = newpatient.Id,
-                Name = newpatient.Name,
-                Status = newpatient.Status,
-                DateOfAdm = newpatient.DateOfAdm,
-                DateOfDis = newpatient.DateOfDis,
-                Roomno = newpatient.Roomno,
-                //PersonalInfo = new PersonalInfo() { PatId = newpatient.Id }
-
-            };
-            db.Patients.Add(patient);
-            db.SaveChanges();
-            return RedirectToAction("Patients", "Modules");
-
-
-        }
-        /*At the PersonalInfo, Appointment, Medhistory, Payments button
-         * get the patient Id to see if it is present if not then
-         * display forms to add their information
-         */
-        [HttpPost]
-        public IActionResult GetPatId(int patid, string Button)
-        {
-            //Convert.ToInt32(Request.Form["PatientId"]);
-            int value = patid;
-            var patient = db.Patients.Find(value);
-            var PatientName = patient.Name;
-            if (Button == "personalinfo")
-            {
-                var existingPersonalInfo = db.PersonalInfo.FirstOrDefault(pi => pi.PatId == value);
-
-
-                if (existingPersonalInfo != null)
-                {
-                    var personalInfoId = existingPersonalInfo.PIId;
-                    // PersonalInfo exists for the specified patient
-                    return RedirectToAction("PersonalInfoView", "Modules", new { PersonalInfoId = personalInfoId });
-                }
-                else
-                {
-                    // PersonalInfo does not exist for the specified patient
-                    return RedirectToAction("PersonalInfo", "Modules", new { patientId = value, patientName = PatientName });
-                }
-            }
-            if (Button == "medicalinfo")
-            {
-                return RedirectToAction("MedFile", "Modules", new { patientId = value, patientName = PatientName });
-            }
-            return RedirectToAction("Patients", "Modules");
-
-
-        }
-        //Display form of PersonalInfo for every specific patient
-        public IActionResult PersonalInfo(int patientId, string patientName)
-        {
-            var personalInfo = new Models.PersonalInfo { PatId = patientId, Name = patientName };
-            return View(personalInfo);
-        }
-        //Display PersonalInfo of specific patients
-        public IActionResult PersonalInfoView(int PersonalInfoId)
-        {
-            var PatPersonalInfo = db.PersonalInfo.Find(PersonalInfoId);
-            return View(PatPersonalInfo);
-        }
-
-        //Submit and added the PersonalInfo of Specified patient
-        [HttpPost]
-        public IActionResult PersonalInfo(Models.PersonalInfo personalInfo)
-        {
-            Models.PersonalInfo personalInfo1 = new Models.PersonalInfo()
-            {
-                PatId = personalInfo.PatId,
-                PIId = personalInfo.PIId,
-                Name = personalInfo.Name,
-                FatherName = personalInfo.FatherName,
-                Gender = personalInfo.Gender,
-                Age = personalInfo.Age,
-                Email = personalInfo.Email,
-                Address = personalInfo.Address,
-                Contact = personalInfo.Contact,
-            };
-            db.PersonalInfo.Add(personalInfo1);
-            db.SaveChanges();
-            return RedirectToAction("Patients", "Modules", new { viewpat = personalInfo1 });
-        }
-        /*public IEnumerable<Patients> GetByName()
-        {
-            string name = Request.Form["Searchninput"];
-            return patients.Where(p => string.IsNullOrEmpty(name) || p.Name.StartsWith(name))
-                           .OrderBy(p => p.Name);
-        }*/
-
-
         //Specific method to Search Patients
         [HttpGet]
         public IActionResult OnGet(string searchinput)
@@ -159,23 +58,149 @@ namespace V._3._0.Controllers
             }
             return RedirectToAction("Patients", "Modules");
         }
+        //Display form for new patient for entry
+        public IActionResult NewPatient() { return View(); }
+
+        //Submit the form and add new patient in patient list
         [HttpPost]
-        //Delete MedicalFile using MedId
-        public IActionResult OnDeleteMedfile(int medid, int patid)
+        public IActionResult NewPatient(Models.Patients newpatient)
         {
-            var medfile = db.MedicalInfo.Find(medid);
-            db.MedicalInfo.Remove(medfile);
+            Models.Patients patient = new Models.Patients()
+            {
+                Id = newpatient.Id,
+                Name = newpatient.Name,
+                Status = newpatient.Status,
+                DateOfAdm = newpatient.DateOfAdm,
+                DateOfDis = newpatient.DateOfDis,
+                Roomno = newpatient.Roomno,
+                //PersonalInfo = new PersonalInfo() { PatId = newpatient.Id }
+
+            };
+            db.Patients.Add(patient);
             db.SaveChanges();
-            return RedirectToAction("MedFiles", "Modules", new { patientId = patid});
+            return RedirectToAction("Patients", "Modules");
+
+
+        }
+
+        /*At the PersonalInfo, Appointment, Medhistory, Payments button
+         * get the patient Id to see if it is present if not then
+         * display forms to add their information
+         */
+        [HttpPost]
+        public IActionResult GetPatId(int patid, string Button)
+        {
+            //Convert.ToInt32(Request.Form["PatientId"]);
+            int value = patid;
+            var patient = db.Patients.Find(value);
+            var PatientName = patient.Name;
+            if (Button == "personalinfo")
+            {
+                var existingPersonalInfo = db.PersonalInfo.FirstOrDefault(pi => pi.PatId == value);
+
+
+                if (existingPersonalInfo != null)
+                {
+                    var personalInfoId = existingPersonalInfo.PIId;
+                    // PersonalInfo exists for the specified patient
+                    return RedirectToAction("PersonalInfoView", "Modules", new { PersonalInfoId = personalInfoId, patientId =value });
+                }
+                else
+                {
+                    // PersonalInfo does not exist for the specified patient
+                    return RedirectToAction("PersonalInfo", "Modules", new { patientId = value, patientName = PatientName });
+                }
+            }
+            if (Button == "medicalinfo")
+            {
+                return RedirectToAction("MedFiles", "Modules", new { patientId = value, patientName = PatientName });
+            }
+            return RedirectToAction("Patients", "Modules");
+
+
+        }
+        //Display form of PersonalInfo for every specific patient
+        public IActionResult PersonalInfo(int patientId, string patientName)
+        {
+            var personalInfo = new Models.PersonalInfo { PatId = patientId, Name = patientName };
+            return View(personalInfo);
+        }
+        //Display PersonalInfo of specific patients
+        public IActionResult PersonalInfoView(int PersonalInfoId, int patientId)
+        {
+            var PatPersonalInfo = db.PersonalInfo.Find(PersonalInfoId);
+            ViewBag.patId = patientId;
+            return View(PatPersonalInfo);
+        }
+
+        //Submit and added the PersonalInfo of Specified patient
+        [HttpPost]
+        public IActionResult PersonalInfo(Models.PersonalInfo personalInfo)
+        {
+            Models.PersonalInfo personalInfo1 = new Models.PersonalInfo()
+            {
+                PatId = personalInfo.PatId,
+                PIId = personalInfo.PIId,
+                Name = personalInfo.Name,
+                FatherName = personalInfo.FatherName,
+                Gender = personalInfo.Gender,
+                Age = personalInfo.Age,
+                Email = personalInfo.Email,
+                Address = personalInfo.Address,
+                Contact = personalInfo.Contact,
+            };
+            db.PersonalInfo.Add(personalInfo1);
+            db.SaveChanges();
+            return RedirectToAction("Patients", "Modules", new { viewpat = personalInfo1 });
+        }
+        //Delete Patients Personal Info using patientid
+        [HttpPost]
+        public IActionResult OnDeletePersonalInfo(int patId, int infoId)
+        {
+            var personalinfo = db.PersonalInfo.Find(infoId);
+            db.PersonalInfo.Remove(personalinfo);
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Personal information deleted successfully.";
+            return RedirectToAction("Patients", "Modules");
+
+
+        }
+
+        
+        // view to update patient personal info
+        public IActionResult OnUpdatePersonalInfo(int InfoId) 
+        {
+            var Infodetail = db.PersonalInfo.Find(InfoId);
+            return View(Infodetail);
         }
         [HttpPost]
+        //updated personalinfo of patients personal info
+        public IActionResult UpdatedPersonalInfo(PersonalInfo UpdatedpersonalInfo) 
+        {
+            var existingpersonalinfo = db.PersonalInfo.Find(UpdatedpersonalInfo.PIId);
+            existingpersonalinfo.Name= UpdatedpersonalInfo.Name;
+            existingpersonalinfo.FatherName= UpdatedpersonalInfo.FatherName;
+            existingpersonalinfo.Address= UpdatedpersonalInfo.Address;
+            existingpersonalinfo.Age= UpdatedpersonalInfo.Age;
+            existingpersonalinfo.Gender= UpdatedpersonalInfo.Gender;
+            existingpersonalinfo.Email= UpdatedpersonalInfo.Email;
+            existingpersonalinfo.Contact= UpdatedpersonalInfo.Contact;
+            db.SaveChanges();
+            TempData["UpdateMessage"] = UpdatedpersonalInfo.Name + "Personal information Updated successfully ";
+            return RedirectToAction("Patients", "Modules");
+        }
+
+        
         //update patient using ID
         public IActionResult OnUpdate(int PatientId) 
         {
             var patient = db.Patients.Find(PatientId);
             return View(patient);
         }
+         
 
+
+        //updated done on patient
         [HttpPost]
 
         public IActionResult OnUpdated(Patients UpdatedPatient) 
@@ -191,7 +216,7 @@ namespace V._3._0.Controllers
             return RedirectToAction("Patients", "Modules");
         }
         //For display of multiple medical file of a specific patient
-        public IActionResult MedFile(int patientId)
+        public IActionResult MedFiles(int patientId)
         {
             //list of medical files of specific patient
             List<MedicalInfo> medfiles = db.MedicalInfo.Where(p => p.PatientsId == patientId).ToList();
@@ -240,6 +265,15 @@ namespace V._3._0.Controllers
             }
             return View();
             
+        }
+        [HttpPost]
+        //Delete MedicalFile using MedId
+        public IActionResult OnDeleteMedfile(int medid, int patid)
+        {
+            var medfile = db.MedicalInfo.Find(medid);
+            db.MedicalInfo.Remove(medfile);
+            db.SaveChanges();
+            return RedirectToAction("MedFiles", "Modules", new { patientId = patid });
         }
         public IActionResult GetImage(MedicalInfo file)
         {

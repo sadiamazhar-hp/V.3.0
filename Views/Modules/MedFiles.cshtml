@@ -1,1 +1,27 @@
-﻿
+﻿﻿
+@model System.Collections.Generic.IEnumerable<V._3._0.Models.MedicalInfo>
+<head>
+    <title>MEDICAL HISTORY</title>
+    <link rel="stylesheet" href="~/css/Patients/MedicalInfo/med.css" />
+</head>
+<body>
+    <h1> MEDICAL FILES AND HISTORY</h1>
+    <h2>Patient ID: @ViewBag.ID</h2>
+    <form asp-controller="Modules" asp-action="PatientMed" method="get">
+        <input type="hidden" name="Upload" value="@ViewBag.ID" />
+        <button type="submit" id="Submit-Button">Upload</button>
+    </form>
+    <div id="collect">
+        @foreach (var File in Model)
+        {
+            <form asp-action="OnDeleteMedfile" asp-controller="Modules" method="post">
+            <input name="patid" value="@File.PatientsId" type="hidden">
+            <button name="medid" type="submit" value="@File.MedId"
+            class="button-opt">
+            <img src="~/css/Patients/remove.png" alt="Delete">
+            </button>
+            </form>
+            <img class="Image" src="@Url.Action("RetrieveImage", "Modules", new { id = File.PatientsId })">
+        }
+    </div>
+</body>
