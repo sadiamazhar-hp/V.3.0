@@ -1,0 +1,36 @@
+﻿@model V._3._0.Models.PatientApp
+@using V._3._0.Models;
+@{
+}
+<head>
+    <link rel="stylesheet" href="~/css/Patients/NewPatient.css" />
+</head>
+<body>
+    <h1> Add New Patient</h1>
+    <form asp-controller="Modules" asp-action="AddAppoint" method="post">
+        <input name="PatName" value="@ViewBag.Name" />
+        <div class="input">
+            <input asp-for="App" type="hidden" />
+            <input asp-for="PatientsId" value="@ViewBag.ID">
+        </div>
+        <div class="input">
+            <label asp-for="AppDate">Date Of Appointment:</label>
+            <input asp-for="AppDate" type="date" placeholder="Appointment Date">
+        </div>
+        <div class="input">
+            <label asp-for="AppTime">Date of Time:</label>
+            <input asp-for="AppTime" type="time" placeholder="Appointment Time">
+        </div>
+        <div class="input">
+            <label asp-for="Process">Date Of Adm</label>
+            <input asp-for="Process" type="text" placeholder="Process">
+        </div>
+        <div id="info">
+            <button type="submit" id="Submit-Button">
+                SUBMIT
+            </button>
+    </form>
+</body>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

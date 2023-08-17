@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Net.Http.Headers;
+using System.Drawing;
 
 namespace V._3._0.Controllers
 {
@@ -58,6 +59,7 @@ namespace V._3._0.Controllers
             }
             return RedirectToAction("Patients", "Modules");
         }
+        
         //Display form for new patient for entry
         public IActionResult NewPatient() { return View(); }
 
@@ -115,7 +117,12 @@ namespace V._3._0.Controllers
             {
                 return RedirectToAction("MedFiles", "Modules", new { patientId = value, patientName = PatientName });
             }
+            if (Button == "AppList")
+            {
+                return RedirectToAction("AppList", "Modules", new {PatientId = value , PatientName = PatientName});
+            }
             return RedirectToAction("Patients", "Modules");
+
 
 
         }
@@ -287,7 +294,47 @@ namespace V._3._0.Controllers
             return NotFound();
         }
         //<img src="@Url.Action("RetrieveImage", "Modules", new { id = Model.PatientsId })" alt="Patient Image" />
-
+        List<PatientApp> Appointments;
+        public IActionResult AppList(int PatientId , string PatientName)
+        {
+            List<PatientApp> Appointments = db.PatientApp.Where(p => p.PatientsId == PatientId).ToList();
+            ViewBag.ID = PatientId;
+            ViewBag.Name = PatientName;
+            return View(Appointments); 
+        }
+        public IActionResult AddApp(int PatId,string Name) 
+        {
+            ViewBag.ID = PatId;
+            ViewBag.Name = Name;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddAppoint(PatientApp Appointment, String PatName) 
+        {
+            PatientApp newApp  = new PatientApp()
+            {
+                App = Appointment.App,
+                AppDate = Appointment.AppDate,
+                AppTime = Appointment.AppTime,
+                Process = Appointment.Process,
+                PatientsId = Appointment.PatientsId
+            };
+            db.PatientApp.Add(newApp);
+            db.SaveChanges();
+            TempData["AddMessage"] = "Appointment Added succesfully";
+            return RedirectToAction("AppList","Modules",new { PatientId = Appointment.PatientsId, PatientName = PatName});
+        }
+        //Delete Patients Appointment 
+        public IActionResult OnDeleteApp(int AppId, int PatId, string PatName)
+        {
+            var App = db.PatientApp.Find(AppId);
+            if (App != null)
+            {
+                db.PatientApp.Remove(App);
+                db.SaveChanges();
+            }
+            return RedirectToAction("AppList", "Modules", new { PatientName = PatName, PatientId = PatId });
+        }
     }
 }
 

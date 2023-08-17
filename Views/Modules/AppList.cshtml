@@ -1,0 +1,90 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model System.Collections.Generic.IEnumerable<V._3._0.Models.PatientApp>
+<head>
+    <title>Appointments</title>
+    <link rel="stylesheet" href="~/css/Patients/Appointments/DocApp.css" />
+</head>
+<body>
+    <!--Alert Message to display the Appointment of patient has been added-->
+    @if (TempData.ContainsKey("AddMessage"))
+    {
+        <div class="alert alert-success">
+            @TempData["AddMessage"]
+        </div>
+    }
+
+<h1> List Of Appointments</h1>
+<h2>@ViewBag.Name</h2>
+    <div class="Search-Section">
+        <!--
+        <form asp-controller="Modules" asp-action="OnGet" method="get">
+            <input name="searchinput" type="text" class="Search-Input" placeholder="Search Patient Name" />
+            <button type="submit" id="Search-Button"><img src="~/css/Patients/PatientSearch.png"></button>
+        </form>
+        -->
+        
+    </div>
+    <hr>
+    <div>
+        <form asp-controller="Modules" asp-action="AddApp">
+            <input name="PatId" value="@ViewBag.ID" type="hidden" />
+            <input name="Name" value="@ViewBag.Name" type="hidden" />
+            <button  class="Create_Button">Add Apointment</button>
+        </form>
+        
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.AppDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.AppTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model=> Model.Process)
+                </th>
+                <th>
+                    Options
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var app in Model)
+            {
+                <tr>
+                    <td>@app.App</td>
+                    <td>@app.AppDate</td>
+                    <td>@app.AppTime</td>
+                    <td>@app.Process</td>
+                    <td>
+                        <form >
+                            <button name="AppId" type="submit" value="@app.App"
+                                class="button-opt">
+                                <img src="~/css/Patients/write.png" alt="Update">
+                            </button>
+                        </form>
+                        <form >
+                            <input name="AppId" value="@app.App" type="hidden">
+                            <input name="PatId" value="@ViewBag.ID" type="hidden">
+                            <input name="PatName" value="@ViewBag.Name" type="hidden">
+                            <button type="submit"
+                                class="button-opt">
+                                <img src="~/css/Patients/remove.png" alt="Delete">
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

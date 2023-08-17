@@ -1,0 +1,68 @@
+body{
+    background-image: linear-gradient(63.1deg, rgba(179, 179, 206, 0.712) 16.4%, rgba(43, 55, 90, 0.644) 64.5%);
+}
+h1{
+    text-align: center;
+    background-image: linear-gradient(63.1deg, rgba(162, 162, 185, 0.767) 16.4%, rgba(55, 65, 92, 0.644) 64.5%);
+    width: 35%;
+    padding: 20px;
+    border-radius: 10cm;
+    position: relative;
+    left: 31.5%;
+    box-shadow: 6px 5px 9px #393b47;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-shadow: 2px 3px 5px#b1a4a45b;
+    border: 3.5px;
+    border-color: #545a7c67;
+    border-style: solid;
+}
+h2{
+    position: relative;
+    left: 43%;
+    top: 5%;
+}
+table{
+    width: 100%;
+    background-color: rgb(198, 199, 221);
+}
+.app{
+    overflow: auto;
+}
+tr:nth-child(even) {
+    background-color: rgba(96, 98, 133, 0.5);
+  }
+
+table, td{
+    border: 1px solid black;
+}
+.Constant-Info{
+    grid-template-columns: repeat(12);
+}
+table tr td{
+    padding: 3px;
+    position:relative;
+    
+}
+#Options{
+    width: 10%;
+}
+.Create_Button{
+    position: relative;
+    top: 5px;
+    height: 50px;
+    width: 150px;
+    margin-bottom: 2%;
+    background-image: linear-gradient(63.1deg, rgb(171, 171, 218) 16.4%, rgba(56, 69, 109, 0.863) 64.5%);
+    border: none;
+    border-radius: 23cm;
+    box-shadow: 5px 3px 5px #302c2c;
+    cursor: pointer;
+    transition-property: color, box-shadow, background-image;
+    transition: 0.6s;
+}
+.Create_Button:hover{
+    color: #ffffff;
+    box-shadow:5px 3px 5px #302c2c,
+               10px 6px 5px #463e3ec0;
+    background-image:  linear-gradient(63.1deg, rgb(97, 97, 119) 16.4%, rgba(38, 48, 77, 0.863) 64.5%) ;
+}

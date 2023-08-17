@@ -20,12 +20,14 @@
     <link rel="stylesheet" href="~/css/Patients/Patients.css" />
 </head>
 <body>
+    <!--Alert Message to display the personalinfo of patient has been deleted-->
     @if (TempData.ContainsKey("SuccessMessage"))
     {
         <div class="alert alert-success">
             @TempData["SuccessMessage"]
         </div>
     }
+    <!--Alert Message to display the personalinfo of patient has been updated-->
     @if (TempData.ContainsKey("UpdateMessage"))
     {
         <div class="alert alert-success">
@@ -93,7 +95,14 @@
                                BioInfo
                             </button>
                         </form>
-                        <a href="#"><button class="button-info">Appoints</button></a>
+                        <!--Appointments of a patient-->
+                        <form asp-action="GetPatId" asp-controller="Modules" method="post">
+                            <input name="patid" value="@patients.Id" type="hidden" />
+                            <button name="Button" type="submit" value="AppList"
+                                class="button-info">
+                                Appointments
+                            </button>
+                        </form>
                         <!--Medical history of a patient-->
                         <form asp-action="GetPatId" asp-controller="Modules" method="post">
                             <input name="patid" value="@patients.Id" type="hidden" />
