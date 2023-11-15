@@ -1,0 +1,29 @@
+﻿@model V._3._0.Models.PatientPayment
+@using V._3._0.Models;
+
+<head>
+    <link rel="stylesheet" href="~/css/Patients/NewPatient.css" />
+</head>
+<body>
+    <h1> Add New Patient</h1>
+    <form asp-controller="Modules" asp-action="AddPays" method="post">
+        <div class="input">
+            <input asp-for="PatientsId" value="@ViewBag.ID" >
+        </div>
+        <div class="input">
+            <label asp-for="DOB">Date Of Payment:</label>
+            <input asp-for="DOB" type="date" placeholder="Payment Date">
+        </div>
+        <div class="input">
+            <label asp-for="Amount">Amount</label>
+            <input asp-for="Amount" type="text" placeholder="Amount">
+        </div>
+        <div id="info">
+            <button type="submit" id="Submit-Button">
+                SUBMIT
+            </button>
+    </form>
+</body>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

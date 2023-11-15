@@ -82,6 +82,7 @@
                         {
                             @patients.Roomno
                         }
+                        
                     </td>
                     <td>@patients.DateOfAdm</td>
                     <td>@patients.DateOfDis</td>
@@ -111,7 +112,14 @@
                                 MedInfo
                             </button>
                         </form>
-                        <a href="#"><button class="button-info">Payments</button></a>
+                       <!--Payments for Patient-->
+                        <form asp-action="GetPatId" asp-controller="Modules" method="post">
+                            <input name="patid" value="@patients.Id" type="hidden" />
+                            <button name="Button" type="submit" value="Payment"
+                                    class="button-info">
+                                Payments
+                            </button>
+                        </form>
                     </td>
                     <!-- ON UPDATE AND ON DELETE BUTTON AND THEIR CODE[m  .;] -->
                     <td>

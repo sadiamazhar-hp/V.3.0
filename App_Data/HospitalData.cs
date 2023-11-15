@@ -13,6 +13,10 @@ namespace V._3._0.App_Data
 
         public DbSet<MedicalInfo> MedicalInfo{ get; set; }
         public DbSet<PatientApp> PatientApp { get; set; }
+
+        public DbSet<PatientPayment> PatientPayments { get; set; }
+
+        public DbSet<PaymentDetail> PaymentDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /* Configure the one-to-one relationship
@@ -36,7 +40,23 @@ namespace V._3._0.App_Data
             .HasMany(m => m.PatientApp)
             .WithOne(p => p.Patients)
             .OnDelete(DeleteBehavior.Cascade);
+
+            /* Configure the one-to-many relationship
+             for patients and its payments*/
+            modelBuilder.Entity<Patients>()
+           .HasMany(s => s.PatientPayments)
+           .WithOne(a => a.Patients)
+           .OnDelete(DeleteBehavior.Cascade);
+
+            /* Configure the one-to-many relationship
+             for Payments and its Details*/
+            modelBuilder.Entity<PatientPayment>()
+           .HasMany(s => s.PaymentDetails)
+           .WithOne(a => a.PatientPayment)
+           .OnDelete(DeleteBehavior.Cascade);
+
         }
+
 
     }
 }

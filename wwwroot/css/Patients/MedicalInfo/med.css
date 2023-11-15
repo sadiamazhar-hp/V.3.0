@@ -20,6 +20,14 @@ h2 {
     position: relative;
     text-align: center;
 }
+.button-opt{
+    height:50px;
+    width:50px;
+    position:relative;
+    left:520px;
+    top:40px;
+
+}
 
 
 #Submit-Button {
@@ -72,7 +80,7 @@ form {
 }
 
 .Image{
-    width: 100%;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     margin-top: 5%;
 }

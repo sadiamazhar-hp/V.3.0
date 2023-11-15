@@ -16,7 +16,9 @@
             @TempData["AddMessage"]
         </div>
     }
-
+    <a asp-action="Patients" asp-controller="Modules">
+        <button type="submit" class="Create_Button">AllPatients</button>
+    </a>
 <h1> List Of Appointments</h1>
 <h2>@ViewBag.Name</h2>
     <div class="Search-Section">
@@ -31,7 +33,7 @@
     <hr>
     <div>
         <form asp-controller="Modules" asp-action="AddApp">
-            <input name="PatId" value="@ViewBag.ID" type="hidden" />
+            <input name="PatId" value="@ViewBag.ID" type="hidden"/>
             <input name="Name" value="@ViewBag.Name" type="hidden" />
             <button  class="Create_Button">Add Apointment</button>
         </form>
@@ -63,17 +65,18 @@
             {
                 <tr>
                     <td>@app.App</td>
-                    <td>@app.AppDate</td>
-                    <td>@app.AppTime</td>
+                    <td>@app.AppDate.ToString("dd-MM-yyyy")</td>
+                    <td>@app.AppTime.ToString("hh:mm tt")</td>
                     <td>@app.Process</td>
                     <td>
-                        <form >
-                            <button name="AppId" type="submit" value="@app.App"
+                        <form asp-action="OnUpdateApp" asp-controller="Modules">
+                            <input name="AppId" value="@app.App" type="hidden">
+                            <button type="submit"
                                 class="button-opt">
                                 <img src="~/css/Patients/write.png" alt="Update">
                             </button>
                         </form>
-                        <form >
+                        <form asp-action="OnDeleteApp" asp-controller="Modules">
                             <input name="AppId" value="@app.App" type="hidden">
                             <input name="PatId" value="@ViewBag.ID" type="hidden">
                             <input name="PatName" value="@ViewBag.Name" type="hidden">

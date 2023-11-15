@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Net.Http.Headers;
 using System.Drawing;
+using System.Data.Entity;
+using System.IO;
 
 namespace V._3._0.Controllers
 {
@@ -18,7 +20,7 @@ namespace V._3._0.Controllers
         public readonly HospitalData db;
         private readonly IPatients patientsdata;
         private readonly IWebHostEnvironment webHostEnvironment;
-        
+
         public ModulesController(HospitalData db, IPatients patientsdata, IWebHostEnvironment webHostEnvironment)
         {
             this.db = db;
@@ -59,7 +61,7 @@ namespace V._3._0.Controllers
             }
             return RedirectToAction("Patients", "Modules");
         }
-        
+
         //Display form for new patient for entry
         public IActionResult NewPatient() { return View(); }
 
@@ -105,7 +107,7 @@ namespace V._3._0.Controllers
                 {
                     var personalInfoId = existingPersonalInfo.PIId;
                     // PersonalInfo exists for the specified patient
-                    return RedirectToAction("PersonalInfoView", "Modules", new { PersonalInfoId = personalInfoId, patientId =value });
+                    return RedirectToAction("PersonalInfoView", "Modules", new { PersonalInfoId = personalInfoId, patientId = value });
                 }
                 else
                 {
@@ -119,10 +121,13 @@ namespace V._3._0.Controllers
             }
             if (Button == "AppList")
             {
-                return RedirectToAction("AppList", "Modules", new {PatientId = value , PatientName = PatientName});
+                return RedirectToAction("AppList", "Modules", new { PatientId = value, PatientName = PatientName });
+            }
+            if (Button == "Payment")
+            {
+                return RedirectToAction("Payment", "Modules", new { PatientID = value });
             }
             return RedirectToAction("Patients", "Modules");
-
 
 
         }
@@ -173,44 +178,44 @@ namespace V._3._0.Controllers
 
         }
 
-        
+
         // view to update patient personal info
-        public IActionResult OnUpdatePersonalInfo(int InfoId) 
+        public IActionResult OnUpdatePersonalInfo(int InfoId)
         {
             var Infodetail = db.PersonalInfo.Find(InfoId);
             return View(Infodetail);
         }
         [HttpPost]
         //updated personalinfo of patients personal info
-        public IActionResult UpdatedPersonalInfo(PersonalInfo UpdatedpersonalInfo) 
+        public IActionResult UpdatedPersonalInfo(PersonalInfo UpdatedpersonalInfo)
         {
             var existingpersonalinfo = db.PersonalInfo.Find(UpdatedpersonalInfo.PIId);
-            existingpersonalinfo.Name= UpdatedpersonalInfo.Name;
-            existingpersonalinfo.FatherName= UpdatedpersonalInfo.FatherName;
-            existingpersonalinfo.Address= UpdatedpersonalInfo.Address;
-            existingpersonalinfo.Age= UpdatedpersonalInfo.Age;
-            existingpersonalinfo.Gender= UpdatedpersonalInfo.Gender;
-            existingpersonalinfo.Email= UpdatedpersonalInfo.Email;
-            existingpersonalinfo.Contact= UpdatedpersonalInfo.Contact;
+            existingpersonalinfo.Name = UpdatedpersonalInfo.Name;
+            existingpersonalinfo.FatherName = UpdatedpersonalInfo.FatherName;
+            existingpersonalinfo.Address = UpdatedpersonalInfo.Address;
+            existingpersonalinfo.Age = UpdatedpersonalInfo.Age;
+            existingpersonalinfo.Gender = UpdatedpersonalInfo.Gender;
+            existingpersonalinfo.Email = UpdatedpersonalInfo.Email;
+            existingpersonalinfo.Contact = UpdatedpersonalInfo.Contact;
             db.SaveChanges();
             TempData["UpdateMessage"] = UpdatedpersonalInfo.Name + "Personal information Updated successfully ";
             return RedirectToAction("Patients", "Modules");
         }
 
-        
+
         //update patient using ID
-        public IActionResult OnUpdate(int PatientId) 
+        public IActionResult OnUpdate(int PatientId)
         {
             var patient = db.Patients.Find(PatientId);
             return View(patient);
         }
-         
+
 
 
         //updated done on patient
         [HttpPost]
 
-        public IActionResult OnUpdated(Patients UpdatedPatient) 
+        public IActionResult OnUpdated(Patients UpdatedPatient)
         {
 
             var existingPatient = db.Patients.Find(UpdatedPatient.Id);
@@ -225,11 +230,15 @@ namespace V._3._0.Controllers
         //For display of multiple medical file of a specific patient
         public IActionResult MedFiles(int patientId)
         {
-            //list of medical files of specific patient
-            List<MedicalInfo> medfiles = db.MedicalInfo.Where(p => p.PatientsId == patientId).ToList();
+            // List of medical files of a specific patient
+            List<MedicalInfo> images = db.MedicalInfo
+                .Where(medicalInfo => medicalInfo.PatientsId == patientId)
+                .ToList();
+
             ViewBag.ID = patientId;
-            return View(medfiles);
+            return View(images);
         }
+
 
         //For medicalinfo of the patient to upload
         public IActionResult PatientMed(int Upload)
@@ -244,7 +253,7 @@ namespace V._3._0.Controllers
         }*/
 
         [HttpPost]
-        public IActionResult PatientMed(MedicalInfo file ,IFormFile ImageFile)
+        public IActionResult PatientMed(MedicalInfo file, IFormFile ImageFile)
         {
             if (ImageFile != null && ImageFile.Length > 0)
             {
@@ -263,15 +272,15 @@ namespace V._3._0.Controllers
                 MedicalInfo File = new MedicalInfo()
                 {
                     PatientsId = file.PatientsId,
-                    ImageFileName = originalFileName ,
+                    ImageFileName = originalFileName,
                     ImageFile = imageBytes
                 };
                 db.MedicalInfo.Add(File);
                 db.SaveChanges();
-                return RedirectToAction("MedFiles", "Modules", new { patientId = File.PatientsId});
+                return RedirectToAction("MedFiles", "Modules", new { patientId = File.PatientsId });
             }
             return View();
-            
+
         }
         [HttpPost]
         //Delete MedicalFile using MedId
@@ -284,7 +293,7 @@ namespace V._3._0.Controllers
         }
         public IActionResult GetImage(MedicalInfo file)
         {
-            
+
             if (file != null)
             {
                 return File(file.ImageFile, "image/jpeg");
@@ -294,24 +303,29 @@ namespace V._3._0.Controllers
             return NotFound();
         }
         //<img src="@Url.Action("RetrieveImage", "Modules", new { id = Model.PatientsId })" alt="Patient Image" />
+
+
+        //list to display appointments of specific patients
         List<PatientApp> Appointments;
-        public IActionResult AppList(int PatientId , string PatientName)
+        public IActionResult AppList(int PatientId, string PatientName)
         {
             List<PatientApp> Appointments = db.PatientApp.Where(p => p.PatientsId == PatientId).ToList();
             ViewBag.ID = PatientId;
             ViewBag.Name = PatientName;
-            return View(Appointments); 
+            return View(Appointments);
         }
-        public IActionResult AddApp(int PatId,string Name) 
+        //to display page for to add apointment
+        public IActionResult AddApp(int PatId, string Name)
         {
             ViewBag.ID = PatId;
             ViewBag.Name = Name;
             return View();
         }
+        //submitted the added appointment and add it in database
         [HttpPost]
-        public IActionResult AddAppoint(PatientApp Appointment, String PatName) 
+        public IActionResult AddAppoint(PatientApp Appointment, String PatName)
         {
-            PatientApp newApp  = new PatientApp()
+            PatientApp newApp = new PatientApp()
             {
                 App = Appointment.App,
                 AppDate = Appointment.AppDate,
@@ -322,7 +336,7 @@ namespace V._3._0.Controllers
             db.PatientApp.Add(newApp);
             db.SaveChanges();
             TempData["AddMessage"] = "Appointment Added succesfully";
-            return RedirectToAction("AppList","Modules",new { PatientId = Appointment.PatientsId, PatientName = PatName});
+            return RedirectToAction("AppList", "Modules", new { PatientId = Appointment.PatientsId, PatientName = PatName });
         }
         //Delete Patients Appointment 
         public IActionResult OnDeleteApp(int AppId, int PatId, string PatName)
@@ -335,6 +349,63 @@ namespace V._3._0.Controllers
             }
             return RedirectToAction("AppList", "Modules", new { PatientName = PatName, PatientId = PatId });
         }
+        // update patients appointment
+        public IActionResult OnUpdateApp(int AppId)
+        {
+            var Appointment = db.PatientApp.Find(AppId);
+            return View(Appointment);
+        }
+        //updated patients appointment
+
+        [HttpPost]
+        public IActionResult OnUpdatedApp(PatientApp UpdatedApp, int AppId)
+        {
+            int PatId = UpdatedApp.PatientsId;
+            var PatName = db.Patients.Find(PatId);
+            var existingApp = db.PatientApp.Find(AppId);
+            existingApp.AppDate = UpdatedApp.AppDate;
+            existingApp.AppTime = UpdatedApp.AppTime;
+            existingApp.Process = UpdatedApp.Process;
+            db.SaveChanges();
+            TempData["UpdateMessage"] = "Appointment Updated successfully ";
+            return RedirectToAction("AppList", "Modules", new { PatientId = PatId, PatientName = PatName.Name });
+
+        }
+
+        //Display Patients Payments list
+
+        public IActionResult Payment(int PatientID)
+        {
+            // List of medical files of a specific patient
+            List<PatientPayment> payments = db.PatientPayments
+                .Where(pays => pays.PatientsId == PatientID)
+                .ToList();
+
+            ViewBag.ID = PatientID;
+            return View(payments);
+        }
+        // to add the payments
+
+        public IActionResult AddPay(int PatId)
+        {
+            ViewBag.ID = PatId;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddPays(PatientPayment payment)
+        { PatientPayment payment1 = new PatientPayment()
+        {
+            PatientsId = payment.PatientsId,
+            DOB = payment.DOB,
+            Amount = payment.Amount
+            };
+            db.PatientPayments.Add(payment1);
+            db.SaveChanges();
+            TempData["AddMessage"] = "Payment Added succesfully";
+            return RedirectToAction("Payment","Modules",new { PatientId = payment.PatientsId});
+        }
+
     }
 }
 

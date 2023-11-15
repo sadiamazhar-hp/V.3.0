@@ -1,8 +1,6 @@
-﻿
-@model V._3._0.Models.Patients
+﻿@model V._3._0.Models.Patients
 @using V._3._0.Models;
-@{
-}
+
 <head>
     <link rel="stylesheet" href="~/css/Patients/NewPatient.css" />
 </head>
@@ -12,30 +10,36 @@
         <div class="input">
             <input asp-for="Id" type="hidden" />
             <label asp-for="Name">Patient Name:</label>
-            <input asp-for="Name" type="text"placeholder="Patient_Name">
+            <input asp-for="Name" type="text" placeholder="Patient_Name">
+            <span class="text-danger" asp-validation-for="Name"></span>
         </div>
         <div class="input">
             <label asp-for="Status">Status</label>
             <select asp-for="Status" asp-items="Html.GetEnumSelectList<PatientStatus>()" id="package-select">
                 <option value="">Select</option>
             </select>
+            <span class="text-danger" asp-validation-for="Status"></span>
         </div>
         <div class="input">
             <label asp-for="Roomno">Room no:</label>
-            <input asp-for="Roomno" type="number" placeholder="Room No" >
+            <input asp-for="Roomno" type="number" placeholder="Room No">
+            <span class="text-danger" asp-validation-for="Roomno"></span>
         </div>
         <div class="input">
             <label asp-for="DateOfAdm">Date Of Adm</label>
             <input asp-for="DateOfAdm" type="datetime-local" placeholder="Date of Admission">
+            <span class="text-danger" asp-validation-for="DateOfAdm"></span>
         </div>
         <div class="input">
             <label asp-for="DateOfDis">Date Of Dis</label>
             <input asp-for="DateOfDis" type="datetime-local" placeholder="Date of Dischage">
+            <span class="text-danger" asp-validation-for="DateOfDis"></span>
         </div>
         <div id="info">
             <button type="submit" id="Submit-Button">
                 SUBMIT
             </button>
+        </div>
     </form>
 </body>
 @section Scripts{

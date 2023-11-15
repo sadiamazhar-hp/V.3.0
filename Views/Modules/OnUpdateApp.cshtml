@@ -6,24 +6,23 @@
     <link rel="stylesheet" href="~/css/Patients/NewPatient.css" />
 </head>
 <body>
-    <h1> Add New Patient</h1>
-    <form asp-controller="Modules" asp-action="AddAppoint" method="post">
-        <input name="PatName" value="@ViewBag.Name" type="hidden"/>
+    <h1> Update Appointment</h1>
+    <form asp-controller="Modules" asp-action="OnUpdatedApp" method="post">
         <div class="input">
-            <input asp-for="App" type="hidden" />
-            <input asp-for="PatientsId" value="@ViewBag.ID" type="hidden">
+            <input asp-for="App" name="AppId" value="@Model.App" type="hidden" />
+            <input asp-for="PatientsId" value="@Model.PatientsId" type="hidden">
         </div>
         <div class="input">
             <label asp-for="AppDate">Date Of Appointment:</label>
-            <input asp-for="AppDate" type="date" placeholder="Appointment Date">
+            @Html.TextBoxFor(m => m.AppDate, "{0:dd/MM/yyyy}", new { @type = "date" })
         </div>
         <div class="input">
             <label asp-for="AppTime">Date of Time:</label>
-            <input asp-for="AppTime" type="time" placeholder="Appointment Time">
+            @Html.TextBoxFor(m => m.AppTime, "{0:hh:mm tt}", new { @type = "time" })
         </div>
         <div class="input">
             <label asp-for="Process">Date Of Adm</label>
-            <input asp-for="Process" type="text" placeholder="Process">
+            <input asp-for="Process" value="@Model.Process" type="text" placeholder="Process">
         </div>
         <div id="info">
             <button type="submit" id="Submit-Button">

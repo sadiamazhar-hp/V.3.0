@@ -30,6 +30,7 @@ namespace V._3._0.Models
         public String Name { get; set; }
         [Required]
         public PatientStatus Status { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter a positive value")]
         public int Roomno { get; set; } 
         [Required]
         [DataType(DataType.Date)]
@@ -43,6 +44,8 @@ namespace V._3._0.Models
         public virtual PersonalInfo PersonalInfo { get; set; }
         public virtual ICollection<MedicalInfo> MedicalInfo { get; set; }
         public virtual ICollection<PatientApp> PatientApp { get; set; }
+
+        public virtual ICollection<PatientPayment> PatientPayments { get; set; }
     }
     public class PersonalInfo
     {
@@ -79,7 +82,7 @@ namespace V._3._0.Models
         public int App { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime AppDate { get; set; }
         [Required]
         [DataType(DataType.Date)]
@@ -92,5 +95,40 @@ namespace V._3._0.Models
 
 
     } 
+    public class PatientPayment
+    {
+        [BindProperty]
+        [Key]
+        public int PayId { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DOB { get; set; }
+
+        [Required]
+        public int Amount { get; set; }
+        public int PatientsId { get; set; } // Convention-based foreign key
+        public virtual Patients Patients { get; set; }
+
+        public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
+    }
+
+    public class PaymentDetail
+    {
+        [BindProperty]
+        [Key]
+        public int Sno { get; set; }
+
+        [Required]
+        public string procedure { get; set; }
+        [Required]
+        public int Amount { get; set; }
+
+        public int PaymentID { get; set; } // convention based foreign key
+
+        public virtual PatientPayment PatientPayment { get; set; }
+
+    }
 
 }

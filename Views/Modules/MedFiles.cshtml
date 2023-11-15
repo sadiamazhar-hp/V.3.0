@@ -1,10 +1,14 @@
 ﻿﻿
-@model System.Collections.Generic.IEnumerable<V._3._0.Models.MedicalInfo>
+<!--model System.Collections.Generic.IEnumerable<V._3._0.Models.MedicalInfo>-->
+@model List<MedicalInfo>
 <head>
     <title>MEDICAL HISTORY</title>
     <link rel="stylesheet" href="~/css/Patients/MedicalInfo/med.css" />
 </head>
 <body>
+    <a asp-action="Patients" asp-controller="Modules">
+        <button type="submit" class="Create_Button">AllPatients</button>
+    </a>
     <h1> MEDICAL FILES AND HISTORY</h1>
     <h2>Patient ID: @ViewBag.ID</h2>
     <form asp-controller="Modules" asp-action="PatientMed" method="get">
@@ -21,7 +25,10 @@
             <img src="~/css/Patients/remove.png" alt="Delete">
             </button>
             </form>
-            <img class="Image" src="@Url.Action("RetrieveImage", "Modules", new { id = File.PatientsId })">
+                <img class="Image" src="data:image/jpeg;base64,@Convert.ToBase64String(File.ImageFile)" alt="@File.ImageFileName" />
+
+            <!--<img class="Image" src="Url.Action("RetrieveImage", "Modules", new { id = File.PatientsId })">
+            -->
         }
     </div>
 </body>

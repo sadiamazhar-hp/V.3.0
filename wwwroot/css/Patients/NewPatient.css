@@ -16,7 +16,7 @@
 
 form {
     height: 350px;
-    width: 40%;
+    width: 60%;
     background-color: rgba(24, 21, 31, 0.11);
     position: relative;
     padding: 30px;
@@ -46,6 +46,7 @@ form {
     padding: 5px;
     margin-left: 8px;
     height: 30px;
+    position:relative;
 }
 
     .input input, select {
@@ -54,7 +55,7 @@ form {
         border-radius: 3cm;
         border-width: 1px;
         width: 30%;
-        height: 6%;
+        height: 75%;
         padding-left: 10px;
         background-color: rgba(206, 208, 218, 0.952);
     }
@@ -115,3 +116,8 @@ form {
         background-image: linear-gradient(63.1deg, rgb(167, 167, 167) 16.4%, rgba(55, 63, 87, 0.897) 64.5%);
         color: #ffffff;
     }
+
+.text-danger {
+    margin-left: 63%; /* 2 inches spacing between input and span */
+    display: block; /* Make the span a block-level element */
+}
